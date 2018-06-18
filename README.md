@@ -1,11 +1,15 @@
-Civilizaciones
+# Civilizaciones
 
 En una galaxia lejana, existen tres civilizaciones. Vulcanos, Ferengis y Betasoides. Cada civilización vive en paz en su respectivo planeta. Dominan la predicción del clima mediante un complejo sistema informático.
 
 Premisas:
+
 ● El planeta Ferengi se desplaza con una velocidad angular de 1 grados/día en sentido horario. Su distancia con respecto al sol es de 500Km.
+
 ● El planeta Betasoide se desplaza con una velocidad angular de 3 grados/día en sentido horario. Su distancia con respecto al sol es de 2000Km.
+
 ● El planeta Vulcano se desplaza con una velocidad angular de 5 grados/día en sentido anti­horario, su distancia con respecto al sol es de 1000Km.
+
 ● Todas las órbitas son circulares.
 
 Cuando los tres planetas están alineados entre sí y a su vez alineados con respecto al sol, el sistema solar experimenta un período de sequía.
@@ -30,13 +34,17 @@ Cloudfoudry) y enviar la URL para consulta:
 Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}
 
 
-Solución:
+# Solución:
 
 1) Para la solución del presente ejercicio, asumimos que los planetas y el sol tienen un tamaño de un punto.
+
 2) Asumimos que el sol se ubica en el origen de coordenadas (0, 0).
+
 3) Tenemos la ubicación de los planetas en coordenadas polares, y lo convertiremos a coordenadas cartesianas. Para esto:
 
-Usamos la función coseno para obtener la coordenada x: cos(angulo) = x / distancia del planeta al sol. Usamos la función seno para y: sin(angulo) = y / distancia del planeta al sol
+Usamos la función coseno para obtener la coordenada x: cos(angulo) = x / distancia del planeta al sol. 
+
+Usamos la función seno para y: sin(angulo) = y / distancia del planeta al sol
 
 4) Para determinar si los tres planetas están alineados, y considerando F = Ferengis, V = Vulcanos y B = Betasoides; basta con probar que los vectores FV y VB tienen la misma dirección. Esto ocurre cuando sus coordenadas son proporcionales:
 
@@ -51,9 +59,10 @@ Obtenido el valor a, podemos calcular la ordenada al origen reemplazando en la e
 Y*V = a*XV + b => Y*V - a*XV = b
 
 Si b es distinto de 0, el sol no está alineado con los planetas y tenemos condiciones óptimas de presión y temperatura.
+
 Si b es igual a 0, el sol está alineado con los planetas y tenemos un período de sequía.
 
-5) Para el caso en que los planetas no estén alineados, necesitamos determinar si el sol está contenido dentro del triángulo que forman los 3 planetas. Para esto, llamando nuevamente la ubicación de cada planeta como F, V y B, y llamando al nuevo punto P, formamos 3 triángulos: FVP, FBP y VBP. Si el punto está contenido dentro del triángulo, debería cumplirse la siguiente igualdad: área(FVP) + área(FBP) + área(VBP) = área(FVB)    
+5) Para el caso en que los planetas no estén alineados, necesitamos determinar si el sol está contenido dentro del triángulo que forman los 3 planetas. Para esto, llamando nuevamente la ubicación de cada planeta como F, V y B, y llamando al nuevo punto P, formamos 3 triángulos: FVP, FBP y VBP. Si el punto está contenido dentro del triángulo, debería cumplirse la siguiente igualdad: área(FVP) + área(FBP) + área(VBP) = área(FVB)
 
 Para calcular el área de un triángulo escaleno, usaremos: raiz(s * (s-a) * (s-b) * (s-c))
 
