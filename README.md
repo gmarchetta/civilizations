@@ -66,8 +66,10 @@ Si b es igual a 0, el sol está alineado con los planetas y tenemos un período 
 
 Para calcular el área de un triángulo escaleno, usaremos: raiz(s * (s-a) * (s-b) * (s-c))
 
-Donde a, b y c son los lados del triángulo y s el semiperímetro: s = (a + b + c) / 2 
+Donde a, b y c son los lados del triángulo y s el semiperímetro: s = (a + b + c) / 2
+ 
+Para conocer el valor de a, b y c, necesitamos calcular el módulo de los vectores que forman cada lado de los triángulos, usando la fórmula: 
 
-Para conocer el valor de a, b y c, necesitamos calcular el módulo de los vectores que forman cada lado de los triángulos, usando la fórmula: raiz(cuadrado(x2-x1)+cuadrado(y2-y1))
+raiz(cuadrado(x2-x1)+cuadrado(y2-y1))
 
 6) Por último, utilizaremos una variable para guardar el MAX(área(FVB)) y la fecha en que se produce. En cada iteración, en caso de que sea el área más grande hasta el momento, sobreescribiremos el valor de dicha variable. Dicho valor representará el pico de intensidad del período de lluvia.
