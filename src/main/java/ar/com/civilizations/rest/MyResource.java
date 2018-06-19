@@ -1,4 +1,4 @@
-package ar.com.civilizations;
+package ar.com.civilizations.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
