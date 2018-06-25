@@ -1,0 +1,22 @@
+{
+	"planets": [
+		{
+			"name": "FERENGI",
+			"dailyAngleVariation": "1",
+			"angle": "0",
+			"distanceToSunInKm": "500"
+		},
+		{
+			"name": "BETASOIDE",
+			"dailyAngleVariation": "3",
+			"angle": "0",
+			"distanceToSunInKm": "2000"
+		},
+		{
+			"name": "VULCANO",
+			"dailyAngleVariation": "-5",
+			"angle": "0",
+			"distanceToSunInKm": "1000"
+		}
+	]
+}

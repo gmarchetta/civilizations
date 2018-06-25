@@ -46,17 +46,17 @@ Usamos la función coseno para obtener la coordenada x: cos(angulo) = x / distan
 
 Usamos la función seno para y: sin(angulo) = y / distancia del planeta al sol
 
-4) Para determinar si los tres planetas están alineados, y considerando F = Ferengis, V = Vulcanos y B = Betasoides; basta con probar que los vectores FV y VB tienen la misma dirección. Esto ocurre cuando sus coordenadas son proporcionales:
+4) Para determinar si los tres planetas están alineados, comparamos la suma de la distancia (modulo del vector) entre el primer planeta y el segundo, mas la distancia entre el segundo y el tercero, contra la distancia entre el primero y el tercero. En caso de ser iguales, los puntos son colineares y los planetas están alineados. 
 
-(XV - XF) / (XB - XV) = (YV - YF) / (YB - YV)
+d = raiz(cuadrado(x2 - x1) + cuadrado(y2 - y1))
 
-En caso de que se cumpla esta condición, debemos determinar si además están alineados con el sol. Para esto necesitamos determinar si el valor de la ordenada al origen es cero (en cuyo caso están alineados con el sol) o no (no están alineados con el sol). Para esto, teniendo en cuenta que la ecuación de la recta es y = ax + b, calculamos primero la pendiente de la recta a la que pertenecen los puntos (a):
+En caso de que se cumpla esta condición, debemos determinar si además están alineados con el sol. Para esto necesitamos determinar si el valor de la ordenada al origen de la recta a la que pertenecen los puntos es cero (en cuyo caso están alineados con el sol) o no (no están alineados con el sol). Para esto, teniendo en cuenta que la ecuación de la recta es y = ax + b, calculamos primero la pendiente de la recta a la que pertenecen los puntos (a):
 
 a = YV - YF / XV - XF
 
 Obtenido el valor a, podemos calcular la ordenada al origen reemplazando en la ecuación de la recta con cualquier punto:
 
-Y*V = a*XV + b => Y*V - a*XV = b
+YV = a*XV + b => YV - a*XV = b
 
 Si b es distinto de 0, el sol no está alineado con los planetas y tenemos condiciones óptimas de presión y temperatura.
 

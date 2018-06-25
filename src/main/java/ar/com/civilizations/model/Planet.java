@@ -1,6 +1,8 @@
 package ar.com.civilizations.model;
 
-public class Planet {
+public class Planet implements Comparable<Planet> {
+	private String name;
+	private float dailyAngleVariation;
 	private float distanceToSunInKm;
 	private float angle;
 	private Float xCoordinate;
@@ -40,4 +42,24 @@ public class Planet {
 		this.yCoordinate = yCoordinate;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getDailyAngleVariation() {
+		return dailyAngleVariation;
+	}
+
+	public void setDailyAngleVariation(float dailyAngleVariation) {
+		this.dailyAngleVariation = dailyAngleVariation;
+	}
+	
+	@Override
+	public int compareTo(Planet otherPlanet) {
+	    return Float.compare(this.getDistanceToSunInKm(), otherPlanet.getDistanceToSunInKm());
+	}
 }

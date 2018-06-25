@@ -1,13 +1,8 @@
 package ar.com.civilizations.prediction;
 
-import ar.com.civilizations.model.Planet;
+import ar.com.civilizations.model.DayWeather;
+import ar.com.civilizations.model.Galaxy;
 
 public interface WeatherForecaster {
-	boolean isDryDay(Planet ferengi, Planet betasoide, Planet vulcano);
-	
-	boolean isRainyDay(Planet ferengi, Planet betasoide, Planet vulcano);
-	
-	boolean isRainPeak(Planet ferengi, Planet betasoide, Planet vulcano);
-	
-	boolean hasOptimalPressureAndTemperature(Planet ferengi, Planet betasoide, Planet vulcano);
+	DayWeather predictWeather(Galaxy galaxy);
 }
