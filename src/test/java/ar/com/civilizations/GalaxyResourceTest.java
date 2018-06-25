@@ -1,17 +1,18 @@
 package ar.com.civilizations;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 import org.glassfish.grizzly.http.server.HttpServer;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-public class MyResourceTest {
+public class GalaxyResourceTest {
 
     private HttpServer server;
     private WebTarget target;
@@ -34,7 +35,7 @@ public class MyResourceTest {
 
     @After
     public void tearDown() throws Exception {
-        server.stop();
+        server.shutdownNow();
     }
 
     /**
@@ -42,7 +43,7 @@ public class MyResourceTest {
      */
     @Test
     public void testGetIt() {
-        String responseMsg = target.path("myresource").request().get(String.class);
-        assertEquals("Got it!", responseMsg);
+        Response responseMsg = target.path("galaxy").request().post(null);
+        assertEquals(200, responseMsg.getStatus());
     }
 }
