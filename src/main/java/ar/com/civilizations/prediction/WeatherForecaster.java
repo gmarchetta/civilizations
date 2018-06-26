@@ -19,4 +19,6 @@ public interface WeatherForecaster {
 	Long getAmountOfDryDays();
 	
 	Long getAmountOfOptimalConditionDays();
+
+	DayWeather getDayWeatherByDay(Long day);
 }

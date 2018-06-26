@@ -5,11 +5,15 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ar.com.civilizations.model.DayWeather;
+import ar.com.civilizations.model.Weather;
+import ar.com.civilizations.model.response.DayWeatherCount;
+import ar.com.civilizations.model.response.DayWeatherResponse;
 import ar.com.civilizations.prediction.WeatherForecaster;
 
 @Path("galaxy/weather")
@@ -29,7 +33,8 @@ public class WeatherResource {
 	@Path("rainy")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAmountOfRainyDays() {
-		weatherForecaster.getAmountOfRainyDays();
+		DayWeatherResponse weatherResponse = new DayWeatherResponse();
+		weatherResponse.setDay(weatherForecaster.getAmountOfRainyDays());
 		return Response.ok().build();
 	}
 
@@ -38,22 +43,42 @@ public class WeatherResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getDayOfRainyPeak() {
 		DayWeather dayWeather = weatherForecaster.getDayWithPeakRainfall();
-		return Response.ok().entity(dayWeather).build();
+		DayWeatherResponse weatherResponse = new DayWeatherResponse();
+		weatherResponse.setDay(weatherForecaster.getDayWithPeakRainfall().getDay());
+		weatherResponse.setWeather(dayWeather.getWeather());
+		return Response.ok().entity(weatherResponse).build();
 	}
 
 	@GET
 	@Path("optimal")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAmountOfOptimalConditionDays() {
-		weatherForecaster.getAmountOfOptimalConditionDays();
+		long count = weatherForecaster.getAmountOfOptimalConditionDays();
+		DayWeatherCount dayWeatherCount = new DayWeatherCount();
+		dayWeatherCount.setDayCount(count);
+		dayWeatherCount.setWeather(Weather.OPTIMAL);
 		return Response.ok().build();
 	}
 
 	@GET
-	@Path("{date}")
+	@Path("date/{date}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getWeatherForDay(Date date) {
+	public Response getWeatherForDate(@PathParam("date") Date date) {
 		DayWeather dayWeather = weatherForecaster.getDayWeatherByDate(date);
-		return Response.ok().entity(dayWeather).build();
+		DayWeatherResponse weatherResponse = new DayWeatherResponse();
+		weatherResponse.setDay(dayWeather.getDay());
+		weatherResponse.setWeather(dayWeather.getWeather());
+		return Response.ok().entity(weatherResponse).build();
+	}
+	
+	@GET
+	@Path("day/{day}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getWeatherForDay(@PathParam("day") Long day) {
+		DayWeather dayWeather = weatherForecaster.getDayWeatherByDay(day);
+		DayWeatherResponse weatherResponse = new DayWeatherResponse();
+		weatherResponse.setDay(dayWeather.getDay());
+		weatherResponse.setWeather(dayWeather.getWeather());
+		return Response.ok().entity(weatherResponse).build();
 	}
 }

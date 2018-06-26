@@ -9,7 +9,7 @@
 
 	<select id="getDayWithRainfallPeakDayWeather"
 		resultType="ar.com.civilizations.model.DayWeather">
-		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle FROM dayweather WHERE
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle, DAY FROM dayweather WHERE
 		WEATHER = 'RAINY_PEAK'
 	</select>
 
@@ -18,19 +18,25 @@
 		useGeneratedKeys="true" keyProperty="dayWeather.id" keyColumn="ID">
 		INSERT
 		INTO dayweather (WEATHER,
-		DATE, AREA_TRIANGLE) VALUES (#{dayWeather.weather},
-		#{dayWeather.date}, #{dayWeather.areaTriangle})
+		DATE, AREA_TRIANGLE, DAY) VALUES (#{dayWeather.weather},
+		#{dayWeather.date}, #{dayWeather.areaTriangle}, #{dayWeather.day})
 	</insert>
 
 	<select id="getDayWeatherById"
 		resultType="ar.com.civilizations.model.DayWeather">
-		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle FROM dayweather WHERE ID = #{dayWeatherId}
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle, DAY FROM dayweather WHERE ID = #{dayWeatherId}
 	</select>
 
 	<select id="getDayWeatherByDate"
 		resultType="ar.com.civilizations.model.DayWeather">
-		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle FROM dayweather WHERE DATE =
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle, DAY FROM dayweather WHERE DATE =
 		#{dayWeatherDate}
+	</select>
+	
+	<select id="getDayWeatherByDay"
+		resultType="ar.com.civilizations.model.DayWeather">
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle, DAY FROM dayweather WHERE DATE =
+		#{dayWeatherDay}
 	</select>
 	
 	<select id="getAmountOfRainyDays"

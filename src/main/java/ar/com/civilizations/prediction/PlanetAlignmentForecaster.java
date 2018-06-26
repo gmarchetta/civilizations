@@ -73,6 +73,11 @@ public class PlanetAlignmentForecaster implements WeatherForecaster {
 	public DayWeather getDayWeatherByDate(Date dayWeatherDate) {
 		return weatherRepository.getDayWeatherByDate(dayWeatherDate);
 	}
+	
+	@Override
+	public DayWeather getDayWeatherByDay(Long day) {
+		return weatherRepository.getDayWeatherByDay(day);
+	}
 
 	@Override
 	public Long getAmountOfRainyDays() {

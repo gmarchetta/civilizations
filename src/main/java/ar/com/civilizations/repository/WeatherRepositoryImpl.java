@@ -69,6 +69,17 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 	}
 	
 	@Override
+	public DayWeather getDayWeatherByDay(Long dayWeatherDay) {
+		DayWeather result = null;
+		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+			WeatherMapper mapper = sqlSession.getMapper(WeatherMapper.class);
+			result = mapper.getDayWeatherByDay(dayWeatherDay);
+		}
+
+		return result;
+	}
+	
+	@Override
 	public Long getAmountOfRainyDays() {
 		Long amountOfRainyDays = 0L;
 		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {

@@ -16,6 +16,8 @@ public interface WeatherMapper {
 	DayWeather getDayWeatherById(@Param("dayWeatherId") Long dayWeatherId);
 
 	DayWeather getDayWeatherByDate(@Param("dayWeatherDate") Date dayWeatherDate);
+	
+	DayWeather getDayWeatherByDay(@Param("dayWeatherDay") Long dayWeatherDay);
 
 	DayWeather getMaxDayWeather();
 	

@@ -7,6 +7,7 @@ public class DayWeather {
 	private Date date;
 	private Weather weather;
 	private float areaTriangle;
+	private long day;
 
 	public Date getDate() {
 		return date;
@@ -38,5 +39,13 @@ public class DayWeather {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getDay() {
+		return day;
+	}
+
+	public void setDay(long day) {
+		this.day = day;
 	}
 }

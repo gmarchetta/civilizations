@@ -46,6 +46,7 @@ public class GalaxyServiceImpl implements GalaxyService {
 			LOGGER.debug("Logging for day: " + calendar.getTime());
 			DayWeather currentDayWeather = weatherForecaster.predictWeather(galaxy);
 			currentDayWeather.setDate(calendar.getTime());
+			currentDayWeather.setDay(dayPrediction);
 
 			if (maxAreaDayWeather == null
 					|| currentDayWeather.getAreaTriangle() > maxAreaDayWeather.getAreaTriangle()) {
