@@ -5,6 +5,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import ar.com.civilizations.service.GalaxyService;
 
@@ -17,16 +18,10 @@ public class GalaxyResource {
 	@Inject
 	private GalaxyService galaxyService;
 	
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     */
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    public String initGalaxy() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response initGalaxy() {
     	galaxyService.initModel();
-        return "Got it!";
+        return Response.ok().build();
     }
 }

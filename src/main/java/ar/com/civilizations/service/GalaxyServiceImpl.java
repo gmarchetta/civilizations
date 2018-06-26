@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import ar.com.civilizations.model.DayWeather;
 import ar.com.civilizations.model.Galaxy;
 import ar.com.civilizations.model.Planet;
+import ar.com.civilizations.model.Weather;
 import ar.com.civilizations.prediction.WeatherForecaster;
 import ar.com.civilizations.repository.WeatherRepository;
 
@@ -52,12 +53,14 @@ public class GalaxyServiceImpl implements GalaxyService {
 			}
 
 			weatherRepository.saveDayWeather(currentDayWeather);
+			
 			dayPrediction++;
 			calendar.add(Calendar.DATE, 1);
 
 			updateGalaxy(galaxy);
 		}
 
+		maxAreaDayWeather.setWeather(Weather.RAINY_PEAK);
 		weatherRepository.updateRainPeakDayWeather(maxAreaDayWeather);
 	}
 

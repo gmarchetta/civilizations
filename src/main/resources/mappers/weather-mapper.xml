@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ar.com.civilizations.mapper.WeatherMapper">
+	<update id="updateRainPeakDayWeather">
+		UPDATE dayweather SET WEATHER = #{dayWeather.weather} WHERE id = #{dayWeather.id}
+	</update>
+
+	<select id="getDayWithRainfallPeakDayWeather"
+		resultType="ar.com.civilizations.model.DayWeather">
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle FROM dayweather WHERE
+		WEATHER = 'RAINY_PEAK'
+	</select>
+
+	<insert id="saveDayWeather"
+		parameterType="ar.com.civilizations.model.DayWeather"
+		useGeneratedKeys="true" keyProperty="dayWeather.id" keyColumn="ID">
+		INSERT
+		INTO dayweather (WEATHER,
+		DATE, AREA_TRIANGLE) VALUES (#{dayWeather.weather},
+		#{dayWeather.date}, #{dayWeather.areaTriangle})
+	</insert>
+
+	<select id="getDayWeatherById"
+		resultType="ar.com.civilizations.model.DayWeather">
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle FROM dayweather WHERE ID = #{dayWeatherId}
+	</select>
+
+	<select id="getDayWeatherByDate"
+		resultType="ar.com.civilizations.model.DayWeather">
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle FROM dayweather WHERE DATE =
+		#{dayWeatherDate}
+	</select>
+	
+	<select id="getAmountOfRainyDays"
+		resultType="Long">
+		SELECT COUNT(ID) FROM dayweather WHERE weather = 'RAINY' OR weather = 'RAINY_PEAK'
+	</select>
+	
+	<select id="getAmountOfDryDays"
+		resultType="Long">
+		SELECT COUNT(ID) FROM dayweather WHERE weather = 'DRY'
+	</select>
+	
+	<select id="getAmountOfOptimalConditionDays"
+		resultType="Long">
+		SELECT COUNT(ID) FROM dayweather WHERE weather = 'OPTIMAL'
+	</select>
+</mapper>

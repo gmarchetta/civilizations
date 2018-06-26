@@ -6,10 +6,18 @@ import ar.com.civilizations.model.DayWeather;
 
 public interface WeatherRepository {
 	void updateRainPeakDayWeather(DayWeather maxAreaDayWeather);
+
+	DayWeather getDayWithRainPeakDayWeather();
+
+	void saveDayWeather(DayWeather dayWeather);
+
+	DayWeather getDayWeatherById(Long dayWeatherId);
+
+	DayWeather getDayWeatherByDate(Date dayWeatherDate);
 	
-	DayWeather saveDayWeather(DayWeather dayWeather);
+	Long getAmountOfDryDays();
 	
-	DayWeather getDayWeather(Long dayWeatherId);
-	
-	DayWeather getDayWeather(Date dayWeatherDate);
+	Long getAmountOfRainyDays();
+
+	Long getAmountOfOptimalConditionDays();
 }

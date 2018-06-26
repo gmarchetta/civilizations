@@ -12,6 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ar.com.civilizations.model.DayWeather;
+
 public class GalaxyResourceTest {
 
     private HttpServer server;
@@ -44,6 +46,19 @@ public class GalaxyResourceTest {
     @Test
     public void testGetIt() {
         Response responseMsg = target.path("galaxy").request().post(null);
+        assertEquals(200, responseMsg.getStatus());
+        
+        responseMsg = target.path("galaxy/weather/dry").request().get();
+        assertEquals(200, responseMsg.getStatus());
+        
+        responseMsg = target.path("galaxy/weather/rainy").request().get();
+        assertEquals(200, responseMsg.getStatus());
+        
+        responseMsg = target.path("galaxy/weather/rainypeak").request().get();
+        assertEquals(200, responseMsg.getStatus());
+        DayWeather dayWeather = (DayWeather) responseMsg.getEntity();
+        
+        responseMsg = target.path("galaxy/weather/optimal").request().get();
         assertEquals(200, responseMsg.getStatus());
     }
 }

@@ -1,5 +1,7 @@
 package ar.com.civilizations.prediction;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.jvnet.hk2.annotations.Service;
@@ -8,6 +10,7 @@ import ar.com.civilizations.model.DayWeather;
 import ar.com.civilizations.model.Galaxy;
 import ar.com.civilizations.model.Planet;
 import ar.com.civilizations.model.Weather;
+import ar.com.civilizations.repository.WeatherRepository;
 import ar.com.civilizations.service.LocationService;
 import ar.com.civilizations.service.MathService;
 
@@ -15,11 +18,14 @@ import ar.com.civilizations.service.MathService;
 public class PlanetAlignmentForecaster implements WeatherForecaster {
 	private LocationService locationService;
 	private MathService mathService;
-	
+	private WeatherRepository weatherRepository;
+
 	@Inject
-	public PlanetAlignmentForecaster(LocationService locationService, MathService mathService) {
+	public PlanetAlignmentForecaster(LocationService locationService, MathService mathService,
+			WeatherRepository weatherRepository) {
 		this.locationService = locationService;
 		this.mathService = mathService;
+		this.weatherRepository = weatherRepository;
 	}
 
 	public DayWeather predictWeather(Galaxy galaxy) {
@@ -49,7 +55,37 @@ public class PlanetAlignmentForecaster implements WeatherForecaster {
 				dayWeather.setAreaTriangle(areaABC);
 			}
 		}
-		
+
 		return dayWeather;
+	}
+
+	@Override
+	public DayWeather getDayWithPeakRainfall() {
+		return weatherRepository.getDayWithRainPeakDayWeather();
+	}
+	
+	@Override
+	public DayWeather getDayWeatherById(Long dayWeatherId) {
+		return weatherRepository.getDayWeatherById(dayWeatherId);
+	}
+	
+	@Override
+	public DayWeather getDayWeatherByDate(Date dayWeatherDate) {
+		return weatherRepository.getDayWeatherByDate(dayWeatherDate);
+	}
+
+	@Override
+	public Long getAmountOfRainyDays() {
+		return weatherRepository.getAmountOfRainyDays();
+	}
+
+	@Override
+	public Long getAmountOfDryDays() {
+		return weatherRepository.getAmountOfDryDays();
+	}
+
+	@Override
+	public Long getAmountOfOptimalConditionDays() {
+		return weatherRepository.getAmountOfOptimalConditionDays();
 	}
 }
