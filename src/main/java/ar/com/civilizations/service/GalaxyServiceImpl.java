@@ -9,10 +9,12 @@ import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 
+import ar.com.civilizations.exceptions.CivilizationsInternalServerErrorException;
 import ar.com.civilizations.model.DayWeather;
 import ar.com.civilizations.model.Galaxy;
 import ar.com.civilizations.model.Planet;
@@ -21,7 +23,7 @@ import ar.com.civilizations.prediction.WeatherForecaster;
 import ar.com.civilizations.repository.WeatherRepository;
 
 public class GalaxyServiceImpl implements GalaxyService {
-	private final static Logger LOGGER = Logger.getLogger(GalaxyServiceImpl.class);
+	private final static Logger LOGGER = LogManager.getLogger(GalaxyServiceImpl.class);
 	
 	private WeatherForecaster weatherForecaster;
 	private WeatherRepository weatherRepository;
@@ -43,8 +45,9 @@ public class GalaxyServiceImpl implements GalaxyService {
 		DayWeather maxAreaDayWeather = null;
 		
 		while (dayPrediction < 365 * 10) {
-			LOGGER.debug("Logging for day: " + calendar.getTime());
+			LOGGER.info("Logging for day: {}", dayPrediction);
 			DayWeather currentDayWeather = weatherForecaster.predictWeather(galaxy);
+			LOGGER.info("Predicted weather for day: {}", currentDayWeather);
 			currentDayWeather.setDate(calendar.getTime());
 			currentDayWeather.setDay(dayPrediction);
 
@@ -74,7 +77,8 @@ public class GalaxyServiceImpl implements GalaxyService {
 			br = new BufferedReader(new FileReader(classLoader.getResource("planets.json").getFile()));
 			galaxy = gson.fromJson(br, Galaxy.class);
 		} catch (FileNotFoundException e) {
-			// LOGGER.log("Error reading data source for galaxy initialization.");
+			LOGGER.error("Error reading data source for galaxy initialization.");
+			throw new CivilizationsInternalServerErrorException();
 		}
 
 		// Sorting by distance to sun

@@ -6,10 +6,15 @@ import java.io.InputStream;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import ar.com.civilizations.exceptions.CivilizationsInternalServerErrorException;
 
 public class DatabaseUtils {
 	private static DatabaseUtils databaseUtils;
 	private SqlSessionFactory sqlSessionFactory;
+	private final static Logger LOGGER = LogManager.getLogger(DatabaseUtils.class);
 	
 	private DatabaseUtils() {
 	}
@@ -28,7 +33,8 @@ public class DatabaseUtils {
 			InputStream inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			// throw new ;
+			LOGGER.error("Error initializing database");
+			throw new CivilizationsInternalServerErrorException("Error initializing database");
 		}
 	}
 	
