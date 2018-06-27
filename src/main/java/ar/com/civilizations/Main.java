@@ -19,6 +19,7 @@ public class Main {
     
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
+     * Initializes DB
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer() {

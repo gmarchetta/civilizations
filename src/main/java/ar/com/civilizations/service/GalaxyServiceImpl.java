@@ -22,20 +22,33 @@ import ar.com.civilizations.model.Weather;
 import ar.com.civilizations.prediction.WeatherForecaster;
 import ar.com.civilizations.repository.WeatherRepository;
 
+/**
+ * Class responsible for initializing the galaxy model and orchestrating galaxy
+ * updates to feed to the weather forecaster
+ * 
+ * @author gaston.marchetta
+ *
+ */
 public class GalaxyServiceImpl implements GalaxyService {
 	private final static Logger LOGGER = LogManager.getLogger(GalaxyServiceImpl.class);
-	
+
 	private WeatherForecaster weatherForecaster;
 	private WeatherRepository weatherRepository;
 	private LocationService locationService;
 
 	@Inject
-	public GalaxyServiceImpl(WeatherForecaster weatherForecaster, WeatherRepository weatherRepository, LocationService locationService) {
+	public GalaxyServiceImpl(WeatherForecaster weatherForecaster, WeatherRepository weatherRepository,
+			LocationService locationService) {
 		this.weatherForecaster = weatherForecaster;
 		this.weatherRepository = weatherRepository;
 		this.locationService = locationService;
 	}
 
+	/**
+	 * Method to initialize model with predictions. Galaxy initialization is handed
+	 * over to initGalaxy method
+	 */
+	// TODO: this should be configured as a job
 	@Override
 	public void initModel() {
 		Calendar calendar = new GregorianCalendar();
@@ -43,7 +56,7 @@ public class GalaxyServiceImpl implements GalaxyService {
 
 		Galaxy galaxy = initGalaxy();
 		DayWeather maxAreaDayWeather = null;
-		
+
 		while (dayPrediction < 365 * 10) {
 			LOGGER.info("Logging for day: {}", dayPrediction);
 			DayWeather currentDayWeather = weatherForecaster.predictWeather(galaxy);
@@ -57,7 +70,7 @@ public class GalaxyServiceImpl implements GalaxyService {
 			}
 
 			weatherRepository.saveDayWeather(currentDayWeather);
-			
+
 			dayPrediction++;
 			calendar.add(Calendar.DATE, 1);
 
@@ -68,6 +81,12 @@ public class GalaxyServiceImpl implements GalaxyService {
 		weatherRepository.updateRainPeakDayWeather(maxAreaDayWeather);
 	}
 
+	/**
+	 * Method loads planet configuration from a json file and hands over to
+	 * initModel
+	 * 
+	 * @return
+	 */
 	private Galaxy initGalaxy() {
 		Galaxy galaxy = null;
 		Gson gson = new Gson();
@@ -83,11 +102,11 @@ public class GalaxyServiceImpl implements GalaxyService {
 
 		// Sorting by distance to sun
 		Collections.sort(galaxy.getPlanets());
-		
-		for(Planet planet : galaxy.getPlanets()) {
+
+		for (Planet planet : galaxy.getPlanets()) {
 			locationService.updatePlanetCartesianCoordinates(planet);
 		}
-		
+
 		return galaxy;
 	}
 

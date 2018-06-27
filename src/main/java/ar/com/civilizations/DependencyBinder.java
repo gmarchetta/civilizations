@@ -15,6 +15,13 @@ import ar.com.civilizations.service.LocationServiceImpl;
 import ar.com.civilizations.service.MathService;
 import ar.com.civilizations.service.MathServiceImpl;
 
+/**
+ * Class that binds implementations to interfaces. Used by hk2 engine for
+ * dependency injection
+ * 
+ * @author gaston.marchetta
+ *
+ */
 @ApplicationPath("/api")
 public class DependencyBinder extends AbstractBinder {
 	@Override
