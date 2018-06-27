@@ -20,8 +20,8 @@ public class LocationServiceImpl implements LocationService {
 	 */
 	@Override
 	public void updatePlanetCartesianCoordinates(Planet planet) {
-		planet.setxCoordinate((float) Math.cos(planet.getAngle()) * planet.getDistanceToSunInKm());
-		planet.setyCoordinate((float) Math.sin(planet.getAngle()) * planet.getDistanceToSunInKm());
+		planet.setxCoordinate((float) Math.cos(Math.toRadians(planet.getAngle())) * planet.getDistanceToSunInKm());
+		planet.setyCoordinate((float) Math.sin(Math.toRadians(planet.getAngle())) * planet.getDistanceToSunInKm());
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class LocationServiceImpl implements LocationService {
 				thirdPlanet.getxCoordinate(), thirdPlanet.getyCoordinate());
 		float distanceAC = mathService.calculateVectorModule(firstPlanet.getxCoordinate(), firstPlanet.getyCoordinate(),
 				thirdPlanet.getxCoordinate(), thirdPlanet.getyCoordinate());
-		return distanceAB + distanceBC == distanceAC;
+		return Math.abs(distanceAB + distanceBC - distanceAC) <= mathService.getEpsilon();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class LocationServiceImpl implements LocationService {
 		// If total area is equals to the three new areas, sun is contained in the triangle
 		float areaSUM = areaFSS + areaFTS + areaSTS;
 		
-		return areaSUM == areaABC;
+		return Math.abs(areaSUM - areaABC) <= mathService.getEpsilon();
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class LocationServiceImpl implements LocationService {
 		float slope = (firstPlanet.getyCoordinate() - secondPlanet.getyCoordinate())
 				/ (firstPlanet.getxCoordinate() - secondPlanet.getxCoordinate());
 		float yIntercept = firstPlanet.getyCoordinate() - slope * firstPlanet.getxCoordinate();
-		return Math.abs(yIntercept - 0) < mathService.getEpsilon();
+		return Math.abs(yIntercept) <= mathService.getEpsilon();
 	}
 
 }

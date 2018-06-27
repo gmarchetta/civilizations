@@ -56,7 +56,6 @@ public class GalaxyResourceTest {
         
         responseMsg = target.path("galaxy/weather/rainypeak").request().get();
         assertEquals(200, responseMsg.getStatus());
-        DayWeather dayWeather = (DayWeather) responseMsg.getEntity();
         
         responseMsg = target.path("galaxy/weather/optimal").request().get();
         assertEquals(200, responseMsg.getStatus());

@@ -31,8 +31,8 @@ public class LocationServiceImplTest {
 
 		locationService.updatePlanetCartesianCoordinates(planet);
 
-		Assert.assertEquals(0f, planet.getyCoordinate());
-		Assert.assertEquals(500f, planet.getxCoordinate());
+		Assert.assertEquals(0f, planet.getyCoordinate(), 0.001f);
+		Assert.assertEquals(500f, planet.getxCoordinate(), 0.001f);
 	}
 
 	/**
@@ -48,8 +48,8 @@ public class LocationServiceImplTest {
 
 		locationService.updatePlanetCartesianCoordinates(planet);
 
-		Assert.assertEquals(500f, planet.getyCoordinate());
-		Assert.assertEquals(0f, planet.getxCoordinate());
+		Assert.assertEquals(500f, planet.getyCoordinate(), 0.001f);
+		Assert.assertEquals(0f, planet.getxCoordinate(), 0.001f);
 	}
 
 	@Test

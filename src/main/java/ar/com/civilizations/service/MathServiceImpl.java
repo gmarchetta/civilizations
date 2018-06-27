@@ -4,7 +4,7 @@ import org.jvnet.hk2.annotations.Service;
 
 @Service
 public class MathServiceImpl implements MathService {
-	private static final Float EPSILON = 0.001f;
+	private static final Float EPSILON = 0.01f;
 
 	@Override
 	public float calculateVectorModule(float ax, float ay, float bx, float by) {

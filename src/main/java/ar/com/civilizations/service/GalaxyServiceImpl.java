@@ -41,7 +41,7 @@ public class GalaxyServiceImpl implements GalaxyService {
 
 		Galaxy galaxy = initGalaxy();
 		DayWeather maxAreaDayWeather = null;
-
+		
 		while (dayPrediction < 365 * 10) {
 			LOGGER.debug("Logging for day: " + calendar.getTime());
 			DayWeather currentDayWeather = weatherForecaster.predictWeather(galaxy);

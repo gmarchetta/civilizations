@@ -95,7 +95,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 		Long amountOfRainyDays = 0L;
 		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
 			WeatherMapper mapper = sqlSession.getMapper(WeatherMapper.class);
-			amountOfRainyDays = mapper.getAmountOfRainyDays();
+			amountOfRainyDays = mapper.getAmountOfDryDays();
 		}
 
 		return amountOfRainyDays;

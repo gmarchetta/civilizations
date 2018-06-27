@@ -35,7 +35,7 @@
 	
 	<select id="getDayWeatherByDay"
 		resultType="ar.com.civilizations.model.DayWeather">
-		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle, DAY FROM dayweather WHERE DATE =
+		SELECT ID, WEATHER, DATE, AREA_TRIANGLE as areaTriangle, DAY FROM dayweather WHERE DAY =
 		#{dayWeatherDay}
 	</select>
 	

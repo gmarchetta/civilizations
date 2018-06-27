@@ -25,8 +25,10 @@ public class WeatherResource {
 	@Path("dry")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAmountOfDryDays() {
-		weatherForecaster.getAmountOfDryDays();
-		return Response.ok().build();
+		DayWeatherResponse weatherResponse = new DayWeatherResponse();
+		weatherResponse.setDay(weatherForecaster.getAmountOfDryDays());
+		weatherResponse.setWeather(Weather.DRY);
+		return Response.ok().entity(weatherResponse).build();
 	}
 
 	@GET
@@ -35,7 +37,8 @@ public class WeatherResource {
 	public Response getAmountOfRainyDays() {
 		DayWeatherResponse weatherResponse = new DayWeatherResponse();
 		weatherResponse.setDay(weatherForecaster.getAmountOfRainyDays());
-		return Response.ok().build();
+		weatherResponse.setWeather(Weather.RAINY);
+		return Response.ok().entity(weatherResponse).build();
 	}
 
 	@GET
