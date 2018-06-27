@@ -73,3 +73,9 @@ Para conocer el valor de a, b y c, necesitamos calcular el módulo de los vector
 raiz(cuadrado(x2-x1)+cuadrado(y2-y1))
 
 6) Por último, utilizaremos una variable para guardar el MAX(área(FVB)) y la fecha en que se produce. En cada iteración, en caso de que sea el área más grande hasta el momento, sobreescribiremos el valor de dicha variable. Dicho valor representará el pico de intensidad del período de lluvia.
+
+# Trabajo pendiente
+1) Inicialización de galaxia debería ser un job
+2) Agregar swagger docs
+3) Deployment a appengine / cloudfoundry
+4) Mejorar cobertura
